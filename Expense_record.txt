@@ -1,0 +1,2 @@
+2023-11-11 | expense | 2300 | food
+2022-11-23 | income | 2000 | stock

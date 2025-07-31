@@ -1,2 +1,3 @@
-2023-11-11 | expense | 2300 | food
-2022-11-23 | income | 2000 | stock
+2023-12-23 | expense | 2000 | foi
+2023-11-11 | income | 2000 | fish
+2023-12-23 | expense | 5000 | stock

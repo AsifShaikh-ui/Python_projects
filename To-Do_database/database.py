@@ -21,4 +21,41 @@ def create_table():
     conn.commit()
     conn.close()
 
-create_table()
+def add_task(task):
+
+    conn = get_connect()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO task(task, status) VALUES (?,?)
+""",(task,"Pending"))
+    
+    conn.commit()
+    conn.close()
+
+def get_task():
+
+    conn = get_connect()
+    cursor = conn.cursor()
+
+    cursor.execute("""SELECT * FROM task""")
+    data =  cursor.fetchall()
+
+    conn.close()
+    return data
+
+def delete_task(task_id):
+
+    conn = get_connect()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM task WHERE id = ?
+""",(task_id, ))
+    
+    conn.commit()
+    deleted = cursor.rowcount
+    conn.close()
+
+    return deleted
+

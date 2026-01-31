@@ -2,7 +2,8 @@ from database import (
     create_table,
     add_task,
     get_task,
-    delete_task
+    delete_task,
+    mark_done
 )
 
 def view_task():
@@ -36,7 +37,14 @@ def main():
             else:
                 print("Task Not Found")
         elif user == 4:
-            pass
+            print("\n----- Available task ----")
+            view_task()
+            task_id = int(input("Enter the task ID to update : "))
+            if mark_done(task_id):
+                print("\nTask Updated Successfuly !")
+            else:
+                print("Task Not Found")
+            
         elif user == 5:
             print("Good bye!")
             break

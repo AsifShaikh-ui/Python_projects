@@ -36,3 +36,25 @@ def add_expense(amount, category, date, note):
     
     conn.commit()
     conn.close()
+
+def view_expense():
+
+    conn = get_connect()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM expenses")
+    result = cursor.fetchall()
+
+    conn.close()
+    return result
+
+def delete_expense(expense_id):
+
+    conn = get_connect()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM expenses WHERE id = ?", (expense_id,))
+
+    conn.commit()
+    conn.close()
+    

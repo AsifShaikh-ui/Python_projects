@@ -1,6 +1,8 @@
 from database import (
     create_table,
-    add_expense
+    add_expense,
+    view_expense,
+    delete_expense
 )
 
 def main():
@@ -9,7 +11,7 @@ def main():
 
     while True:
         print("\n-------- Expense Tracker -------")
-        print("1. Add Expenses \n2. View Expense Record \n3. Delete Expense \n4.Exit")
+        print("1️⃣. Add Expenses \n2️⃣. View Expense Record \n3️⃣. Delete Expense \n4️⃣. Exit")
 
         choice = int(input("Choose from menu (1-4):  "))
 
@@ -20,10 +22,29 @@ def main():
             date = input("Enter the date of expense (YYYY-MM-DD): ")
             note = input("Enter the reason of expense: ")
             add_expense(amount, category, date, note)
-            print("Record Saved successfully")
+            print("\nRecord Saved Successfully✅")
+
+        elif choice == 2:
+
+            expenses = view_expense()
+            print("\n------------ All Expenses ------------\n")
+            for ex in expenses:
+                print(f"{ex[0]}. {ex[1]} | {ex[2]} | {ex[3]} | {ex[4]}")
+        
+        elif choice == 3:
+
+            expenses = view_expense()
+            print("\n------------ All Expenses ------------\n")
+            for ex in expenses:
+                print(f"{ex[0]}. {ex[1]} | {ex[2]} | {ex[3]} | {ex[4]}")
+
+            expense_id = int(input("\nEnter the expense 'id' to delete : "))
+
+            delete_expense(expense_id)
+            print("\nOne Expense Deleted Successfully✅")
 
         elif choice ==  4:
-            print("Done with updation!")
+            print("Done with Updation!")
             break
         else:
             print("Enter the choice in range!")

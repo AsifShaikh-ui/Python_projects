@@ -57,4 +57,28 @@ def delete_expense(expense_id):
 
     conn.commit()
     conn.close()
+
+def get_total_expense():
+
+    conn = get_connect()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT SUM(amount) FROM expenses
+""")
     
+    result = cursor.fetchone()
+    total = result[0] if result[0] is not None else 0
+    conn.close()
+    return total
+
+def get_total_by_category():
+
+    conn = get_connect()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT category, SUM(amount) FROM expenses GROUP BY category")
+
+    result = cursor.fetchall()
+    conn.close()
+    return result

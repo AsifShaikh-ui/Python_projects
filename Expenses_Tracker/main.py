@@ -4,7 +4,8 @@ from database import (
     view_expense,
     delete_expense,
     get_total_expense,
-    get_total_by_category
+    get_total_by_category,
+    get_monthly_total
 )
 
 def main():
@@ -13,7 +14,7 @@ def main():
 
     while True:
         print("\n-------- Expense Tracker -------")
-        print("1️⃣. Add Expenses \n2️⃣. View Expense Record \n3️⃣. Delete Expense \n4️⃣. View Total Expense \n5️⃣. Exit")
+        print("1️⃣. Add Expenses \n2️⃣. View Expense Record \n3️⃣. Delete Expense \n4️⃣. View Total Expense \n5️⃣. View Monthly Total \n6️⃣. Exit")
 
         choice = int(input("Choose from menu (1-4):  "))
 
@@ -54,10 +55,17 @@ def main():
             for category, total in total_expense_by_category:
                 print(f"{category} : {total}")
 
+        elif choice == 5:
+            month  = input("\nEnter the month (YYYY-MM): ")
+            print("\n ----------- Monthly Total -----------")
+            total = get_monthly_total(month)
+            print(f"Month : {month}")
+            print(f"Total : {total[0]}")
 
-        elif choice ==  5:
+        elif choice ==  6:
             print("Done with Updation!")
             break
+
         else:
             print("Enter the choice in range!")
 

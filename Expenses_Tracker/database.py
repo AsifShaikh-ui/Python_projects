@@ -82,3 +82,16 @@ def get_total_by_category():
     result = cursor.fetchall()
     conn.close()
     return result
+
+def get_monthly_total(month):
+
+    conn = get_connect()
+    cursor = conn.cursor()
+    pattern = month + "%"
+    cursor.execute("""
+        SELECT SUM(amount) FROM expenses WHERE date LIKE ?
+""",(pattern, ))
+    
+    result = cursor.fetchone()
+    conn.close()
+    return result

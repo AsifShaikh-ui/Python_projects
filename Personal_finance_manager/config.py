@@ -15,7 +15,7 @@ def load_config():
 
 def save_config(config_data):
     with open(file_name,"w") as f:
-        f.write(json.dump(config_data))
+        f.write(json.dumps(config_data))
 
 def set_budget(amount):
     if amount <= 0:
@@ -23,6 +23,7 @@ def set_budget(amount):
     config = load_config()
     config["monthly_budget"] = amount
     save_config(config)
+    return True
 
 def get_budget():
     budget = load_config()

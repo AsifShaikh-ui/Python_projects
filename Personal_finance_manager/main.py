@@ -8,7 +8,11 @@ from database import (
     )
 
 from reports import get_remaining_budget
-from analytics import get_monthly_total
+
+from analytics import (
+    get_monthly_total,
+    get_category_summary,
+    )
 
 
 def main():
@@ -66,6 +70,16 @@ def main():
 
             total = get_monthly_total(month)
             print(f"Total expense for {month} : {total}")
+
+            user = input("Want category wise summary (yes/no) : ").lower().strip()
+
+            if user == "yes":
+                summary = get_category_summary(month)
+                if summary:
+                    for category, amount in summary:
+                        print(f"{category} : {amount}")
+                else:
+                    print("Nothing to show")
 
         elif choice == "5" :
             print("Goodbye...")

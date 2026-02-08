@@ -54,10 +54,10 @@ def main():
             else:
                 print("Failed to record expense")
 
-        elif choice ==  "3 ":
+        elif choice ==  "3":
             remaining = get_remaining_budget()
 
-            print(f"\n{remaining}")
+            print(f"\nRemaing budget : {remaining}")
 
             if remaining < 0 :
                 print("Warning! You have exceeded your budget")
@@ -69,13 +69,14 @@ def main():
             month = input("Enter the month (YYYY-MM): ")
 
             total = get_monthly_total(month)
-            print(f"Total expense for {month} : {total}")
+            print(f"\nTotal expense for {month} : {total}")
 
             user = input("Want category wise summary (yes/no) : ").lower().strip()
 
             if user == "yes":
                 summary = get_category_summary(month)
                 if summary:
+                    print("\n------------- Category Summary -------------\n")
                     for category, amount in summary:
                         print(f"{category} : {amount}")
                 else:

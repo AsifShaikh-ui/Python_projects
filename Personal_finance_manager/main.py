@@ -8,6 +8,7 @@ from database import (
     )
 
 from reports import get_remaining_budget
+from analytics import get_monthly_total
 
 
 def main():
@@ -17,9 +18,9 @@ def main():
     while True:
 
         print("\n----------------Finance Manager---------------")
-        print("1️⃣. Set Monthly Budget \n2️⃣. Add Expense \n3️⃣. View Remaining budget \n4️⃣. Exit")
+        print("1️⃣. Set Monthly Budget \n2️⃣. Add Expense \n3️⃣. View Remaining budget \n4️⃣. View Monthly Expense \n5️⃣. Exit")
 
-        choice = input("Choose action from menu (1-4) : ")
+        choice = input("Choose action from menu (1-5) : ")
 
         if choice == "1":
 
@@ -59,8 +60,14 @@ def main():
             else:
                 print("Spendings is Undercontrol ")
 
+        elif choice == "4":
 
-        elif choice == "4" :
+            month = input("Enter the month (YYYY-MM): ")
+
+            total = get_monthly_total(month)
+            print(f"Total expense for {month} : {total}")
+
+        elif choice == "5" :
             print("Goodbye...")
             break
 

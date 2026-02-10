@@ -81,5 +81,41 @@ def compare_month(month):
     return  prev_total
 
 
+def get_last_n_month_totals(month, n):
+
+    split_string = month.split(sep="-")
+    year = int(split_string[0])
+    month_num = int(split_string[1])
+
+    month_list = []
+    month_list.append(month)
+
+    for _ in range(n):
+
+        if month_num > 1:
+            month_num -= 1
+
+        elif month_num == 1:
+            month_num = 12
+            year -= 1
+        new_year = str(year)
+        new_month = str(month_num)
+
+        month_format = f"{new_year}-{month_num:02d}"
+        
+        month_list.append(month_format)
+    
+    month_list.reverse()
+
+    n_month_summary = []
+    for month_str in month_list:
+
+        total = get_monthly_total(month_str)
+        n_month_summary.append((month_str, total))
+
+    return n_month_summary 
+
+        
+
 
     

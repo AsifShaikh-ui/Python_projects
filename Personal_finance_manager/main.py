@@ -12,7 +12,8 @@ from reports import get_remaining_budget
 from analytics import (
     get_monthly_total,
     get_category_summary,
-    compare_month
+    compare_month,
+    get_last_n_month_totals
     )
 
 

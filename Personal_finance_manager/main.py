@@ -31,7 +31,7 @@ def main():
 3️⃣. View Remaining Budget
 4️⃣. View Monthly Expense
 5️⃣. Compare Monthly Spendings
-6️⃣. See Trends Over N Months 
+6️⃣. See Trends Over Months 
 7️⃣. Exit
 """)
         choice = input("Choose action from menu (1-7) : ")

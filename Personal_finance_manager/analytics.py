@@ -116,6 +116,43 @@ def get_last_n_month_totals(month, n):
     return n_month_summary 
 
         
+def analyze_trend(month_totals):
 
+    result = {
+        "current_month" : None,
+        "current_total" : None,
+        "previous_total" : None,
+        "change" : None,
+        "percent_change" : None,
+        "trend" : "Insufficient_Data"
+    }
+    
+    if len(month_totals) < 2:
+        return result
+    
+    current_month, current_total = month_totals[-1]
+    previous_month, previous_total = month_totals[-2]
 
+    result["current_month"] = current_month
+    result["current_total"] = current_total
+    result["previous_total"] = previous_total
+
+    if previous_total == 0:
+        return result
+    
+    change = current_total - previous_total
+    percent_change = round(((change/previous_total)*100),2)
+    
+    result["change"] = change
+    result["percent_change"] = percent_change
+
+    if percent_change > 5:
+        result["trend"] = "Increasing"
+    elif percent_change < -5:
+        result["trend"] = "Decreasing"
+    else:
+        result["trend"] = "Stable"
+    
+    return result
+    
     

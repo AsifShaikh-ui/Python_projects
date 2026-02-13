@@ -10,7 +10,7 @@ from database import (
 
 def main():
 
-    create_table()
+    create_table() 
 
     while True:
         print("\n-------- Expense Tracker -------")

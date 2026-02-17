@@ -11,7 +11,7 @@ from database import(
 
 def create_product(name, quantity, price, threshold):
 
-    if name or name.strip() == "":
+    if name.strip() == "":
         raise ValueError ("Name cannot be Empty")
     
     if quantity < 0:

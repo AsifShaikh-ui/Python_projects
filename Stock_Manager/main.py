@@ -7,32 +7,67 @@ from database import(
     delete_product
 )
 
-create_table()
+from service import (
+    create_product,
+    change_stock
+)
 
-name = input("Enter your full name : ")
-quantity = int(input("Enter the quantity of stock : "))
-price = int(input("Enter the total price of stock : "))
-low_stock = int(input("Enter the threshold quantity of stock : "))
+while True:
 
-add_product(name, quantity, price, low_stock)
+    create_table()
 
-id = int(input("Enter the id of the stock: "))
+    print("--------------------- Stock Manager -----------------------")
+    print("""
+1️⃣. Add Products
+2️⃣. View Products
+3️⃣. Change Stock
+4️⃣. Exit
+""")
+    
+    choice  = input("Choose the operation from menu : ")
 
-value = get_product_by_id(id)
-print(value)
+    if choice == "1":
 
-get_list = get_all_products()
-print(get_list)
+        name = input("Enter the stock name: ")
+        quantity = int(input("Enter the quantity of stock: "))
+        price = int(input("Enter the price of stock : "))
+        threshold = int(input("Enter the min quantity of stock : "))
 
-id_1 = int(input("Enter the id of the stock: "))
-new_quantity = int(input("Enter the quantity of stock : "))
-update_product_quantity(id_1, new_quantity)
+        try:
+            create_product(name, quantity, price, threshold)
+            print("Product created successfully✔️")
+        except ValueError as e:
+            print(f"Error: {e}")
+        except Exception as e:
+            print(f"System error : {e}")
 
-get_list_1 = get_all_products()
-print(get_list_1)
+    elif choice == "2":
+        
+        stock_result = get_all_products()
 
-id_2 = int(input("Enter the id of the stock: "))
-delete_product(id_2)
+        print("\n------------------ Available Stocks ---------------------")
+
+        for stock in stock_result:
+            print(f"{stock[0]}. {stock[1]} | {stock[2]} | {stock[3]} | {stock[4]} | {stock[5]}")
+        print("\n")
+
+    elif choice == "3":
+        
+        id = int(input("Enter the id of the stock: "))
+        change_amount = int(input("Enter the quantity for (-ve --> (-)): "))
+
+        update_quantity = change_stock(id, change_amount)
+
+        print(f"\nupdated_quantity: {update_quantity[2]}\n")
+
+    elif choice == "4":
+        print("Thank you...")
+        break
+    else:
+        print("Please choose from the menu only❌")
+
+
+
 
 
 

@@ -45,4 +45,9 @@ def change_stock(product_id, change_quantity):
     
     update_product_quantity(product_id, new_quantity)
 
-    return get_product_by_id(product_id)
+    updated_product = get_product_by_id(product_id)
+    return {
+        "product" : updated_product[1],
+        "low_stock" : updated_product[2] < updated_product[4],
+        "updated_quantity" : updated_product[2]
+    }

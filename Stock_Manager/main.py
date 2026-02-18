@@ -58,7 +58,9 @@ while True:
 
         update_quantity = change_stock(id, change_amount)
 
-        print(f"\nupdated_quantity: {update_quantity[2]}\n")
+        print(f"\nupdated_quantity: {update_quantity["updated_quantity"]}")
+        if  update_quantity["low_stock"]:
+            print("Warning! Stock thresolhd trigger")
 
     elif choice == "4":
         print("Thank you...")

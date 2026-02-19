@@ -41,7 +41,7 @@ def get_top_category(month):
 
     cursor.execute("""
         SELECT category, SUM(amount) AS total FROM expenses WHERE date LIKE ? GROUP BY category 
-                   ORDER BY total DESC LIMIT 3
+                   ORDER BY total DESC LIMIT 1
 """)
 
     top = cursor.fetchone()
@@ -68,7 +68,7 @@ def compare_month(month):
     new_year = str(year)
     new_month = str(mon)
 
-    pattern = f"{new_year}-0{new_month}%"
+    pattern = f"{new_year}-{new_month:02d}%"
 
     cursor.execute("""
         SELECT SUM(amount) FROM expenses WHERE date LIKE ?

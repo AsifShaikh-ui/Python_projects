@@ -6,7 +6,8 @@ from database import(
     get_product_by_id,
     get_all_products,
     update_product_quantity,
-    delete_product
+    delete_product,
+    add_alerts
 )
 
 def create_product(name, quantity, price, threshold):
@@ -37,6 +38,7 @@ def change_stock(product_id, change_quantity):
         raise ValueError ("Product not found")
     
     current_quantity = product_details[2]
+    threshold = product_details[4]
 
     new_quantity = current_quantity + change_quantity
 
@@ -44,6 +46,9 @@ def change_stock(product_id, change_quantity):
         raise ValueError ("Insufficient stock")
     
     update_product_quantity(product_id, new_quantity)
+
+    if current_quantity > threshold and new_quantity <= threshold:
+        add_alerts(product_id, "Low stock threshold rached")
 
     updated_product = get_product_by_id(product_id)
     return {

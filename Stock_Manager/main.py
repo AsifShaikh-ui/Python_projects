@@ -71,7 +71,7 @@ while True:
 
         total = calculate_total_inventory_value()
 
-        print(f"\nTotal inventory value : {total["total_value"]}")
+        print(f"\n Total inventory value : {total["total_value"]}")
         print(f"Total inventory products : {total["total_products"]}")
         print(f"Average inventory value : {total["average_value"]}\n")
 

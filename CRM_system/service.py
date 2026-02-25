@@ -4,7 +4,8 @@ from database import (
     create_table,
     add_client,
     get_client_by_id,
-    interaction
+    interaction,
+    update_client
 )
 
 
@@ -32,6 +33,9 @@ def add_interaction(client_id, type, note):
         raise ValueError("Client not Exists")
     
     status = client_details[4]
+
+    if status != "lead":
+        raise ValueError ("Status is not applicable")
 
     valid_interaction = {"call", "email", "meeting"}
 
@@ -62,4 +66,17 @@ def update_client_status(client_id, new_status):
     if new_status not in valid_tansitions[current_status]:
         raise ValueError("Invalid status transitions")
     
+    try:
+        update_client(client_id, new_status)
+    except sqlite3.IntegrityError:
+        raise ValueError ("client not exists")
+    
+    Updated_info = get_client_by_id(client_id)
+
+    update_status = Updated_info[4]
+
+    return {
+        "client_id" : client_id,
+        "Update_status" : update_status
+    }
 

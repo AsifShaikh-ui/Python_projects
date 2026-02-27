@@ -26,7 +26,7 @@ def create_client(name, phone, email):
     except sqlite3.IntegrityError:
         raise ValueError("Client already exists")
 
-def add_interaction(client_id, type, note):
+def add_interaction(client_id, interaction_type, note):
 
     client_details = get_client_by_id(client_id)
 
@@ -35,16 +35,17 @@ def add_interaction(client_id, type, note):
     
     status = client_details[4]
 
-    if status != "lead":
-        raise ValueError ("Status is not applicable")
-
     valid_interaction = {"call", "email", "meeting"}
 
-    if type not in valid_interaction:
+    if interaction_type not in valid_interaction:
         raise ValueError("Invalid Interaction type")
     
     try:
         interaction(client_id, type, note)
+
+        if status == "lead":
+            update_client_status(client_id, interaction_type)
+        
     except sqlite3.IntegrityError:
         raise ValueError("Check Constraints Failed")
     
@@ -56,21 +57,22 @@ def update_client_status(client_id, new_status):
         raise ValueError("Client not Exists")
     
     current_status = client_details[4]
+    new_status = new_status.strip().lower()
 
-    valid_tansitions = {
-        "lead" : ["contacted", "converted"],
+    valid_transitions = {
+        "lead" : ["contacted", "lost"],
         "contacted" : ["converted", "lost"],
         "converted" : [],
         "lost" : []
     }
 
-    if new_status not in valid_tansitions[current_status]:
+    if new_status not in valid_transitions[current_status]:
         raise ValueError("Invalid status transitions")
     
     try:
         update_client(client_id, new_status)
     except sqlite3.IntegrityError:
-        raise ValueError ("client not exists")
+        raise ValueError ("Check Constraints Fail")
     
     Updated_info = get_client_by_id(client_id)
 
@@ -83,7 +85,7 @@ def update_client_status(client_id, new_status):
 
 def view_records(status):
 
-    valid_interaction = {"call", "email", "meeting"}
+    valid_interaction = {"lead", "contacted", "converted", "lost"}
 
     status = status.strip().lower()
 

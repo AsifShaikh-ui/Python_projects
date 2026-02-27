@@ -3,7 +3,9 @@ import sqlite3
 file_name = "client_database.db"
 
 def get_connect():
-    return sqlite3.connect(file_name)
+    conn =  sqlite3.connect(file_name)
+    conn.execute("PRAGMA foreign_keys = ON")
+    return conn
 
 def create_table():
 
@@ -28,7 +30,7 @@ def create_table():
                    note TEXT NOT NULL,
                    interaction_type TEXT NOT NULL CHECK(interaction_type IN("call", "email", "meeting")),
                    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-                   FOREIGN KEY (client_id) REFERENCES clients(id)
+                   FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
                    )
 """)
     
@@ -59,7 +61,7 @@ def get_client_by_id(client_id):
 
     return row
 
-def interaction(client_id, type, note):
+def interaction(client_id, interaction_type, note):
 
     conn = get_connect()
     cursor = conn.cursor()
@@ -67,7 +69,7 @@ def interaction(client_id, type, note):
     cursor.execute("""
         INSERT INTO interactions (client_id, note, interaction_type)
                    VALUES (?, ?, ?)
-""",(client_id, note, type))
+""",(client_id, note, interaction_type))
     
     conn.commit()
     conn.close()

@@ -44,11 +44,11 @@ def main():
         elif choice == "2":
             
             client_id = int(input("Enter the client_id : "))
-            type = input("Enter the way of interaction: ")
+            interaction_type = input("Enter the way of interaction: ")
             note = input("Leave some note : ")
 
             try:
-                add_interaction(client_id, type, note)
+                add_interaction(client_id, interaction_type, note)
                 print("Interaction Record saved successfully✔️")
             except ValueError as e:
                 print(f"Error : {e}")
@@ -59,12 +59,12 @@ def main():
         elif choice == "3":
             
             client_id = int(input("Enter the client_id : "))
-            new_status = input("Enter the updated status :")
+            new_status = input("Enter the updated status (contacted/ converted/ lost): ")
 
             try:
                 update_status = update_client_status(client_id, new_status)
-                print(f"Client_id : {update_status["client_id"]}")
-                print(f"New status : {update_status["Update_status"]}")
+                print(f"Client_id : {update_status['client_id']}")
+                print(f"New status : {update_status['Update_status']}")
             except ValueError as e:
                 print(f"Error : {e}")
             except Exception as e:
@@ -80,8 +80,6 @@ def main():
                 for view in records:
                     print(f"{view[0]}. {view[1]} | {view[2]} | {view[3]} | {view[4]} | {view[5]}")
             except ValueError as e:
-                print(f"Error : {e}")
-            except Exception as e:
                 print(f"Error : {e}")
 
 

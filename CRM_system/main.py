@@ -105,7 +105,7 @@ def main():
 
             print(f"\nThe Conversion rate of clients : {conversion_rate}\n")
 
-            print("------------ ACtive client Details ---------------\n")
+            print("------------ ACtive client Details ---------------")
             print(f"Client ID : {active_client['client_id']}")
             print(f"Client Name : {active_client['client_name']}")
             print(f"Interaction Count : {active_client['Interaction_count']}")

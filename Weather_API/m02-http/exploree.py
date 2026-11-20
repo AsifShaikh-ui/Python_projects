@@ -19,25 +19,25 @@ data = {
 # print(response.elapsed)
 
 response = httpx.get(url=GET_URL, params=data)
-print(response.status_code)
+print("Get Status code", response.status_code)
 print(response.json())
 print("------------------------------")
 
 response_1 = httpx.post(url=POST_URL, json=data)
-print(response_1.status_code)
+print("Post Status code",response_1.status_code)
 print(response_1.json())
 print("------------------------------")
 
 response_2 = httpx.put(url=PUT_URL, data=data)
-print(response_2.status_code)
+print("Put Status code",response_2.status_code)
 print(response_2.json())
 print("------------------------------")
 
 response_3 = httpx.patch(url=PATCH_URL, json=data)
-print(response_3.status_code)
+print("Patch Status code",response_3.status_code)
 print(response_3.json())
 print("------------------------------")
 
 response_4 = httpx.delete(url=DELETE_URL, params=data)
-print(response_4.status_code)
+print("Delete Status code",response_4.status_code)
 print(response_4.json())
